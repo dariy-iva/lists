@@ -3,17 +3,47 @@ export default {
     lists: [],
     currentList: {},
   }),
+  getters: {
+    // listIndex(state, payload) {
+    //
+    // }
+  },
 
   mutations: {
     setLists(state, payload) {
       state.lists = payload.lists;
     },
-    addList(state, payload) {
-      state.lists = [...state.lists, payload.list];
+    // addList(state, payload) {
+    //   state.lists = [...state.lists, payload.list];
+    // },
+    // deleteList(state, payload) {
+    //   state.lists = state.lists.filter(list => list.id !== payload.list.id);
+    // },
+    setCheckedItem(state, payload) {
+      const {listId, itemId, isChecked} = payload;
+      state.lists.find(list => list.id === listId).items.find(item => item.id === itemId).checked = isChecked;
     },
-    deleteList(state, payload) {
-      state.lists = state.lists.filter(list => list.id !== payload.list.id);
+    setCountItem(state, payload) {
+      const {listId, itemId, count} = payload;
+      state.lists.find(list => list.id === listId).items.find(item => item.id === itemId).count = count;
     },
+    setColorItem(state, payload) {
+      const {listId, itemId, color} = payload;
+      state.lists.find(list => list.id === listId).items.find(item => item.id === itemId).color = color;
+    },
+    updateCheckedItemsList(state, payload) {
+      const {listId, itemId, isChecked} = payload;
+      isChecked
+        ? state.lists.find(list => list.id === listId).checkedItemsIdList.push(itemId)
+        : state.lists.find(list => list.id === listId).checkedItemsIdList = state.lists.find(list => list.id === listId)
+          .checkedItemsIdList.filter(id => id !== itemId)
+    },
+    clearCheckedItemsList(state, payload) {
+      state.lists.find(list => list.id === payload.listId).checkedItemsIdList = [];
+    },
+    // clearCurrentList(state) {
+    //   state.currentList = {};
+    // },
   },
 
   actions: {
@@ -49,7 +79,7 @@ export default {
             color: '#0000FF',
             checked: false,
           },],
-        checkedItemsId: [1, 2, 3],
+        checkedItemsIdList: [1, 2, 3],
       },
         {
           id: 2,
@@ -116,7 +146,7 @@ export default {
               color: '#FFE4E1',
               checked: true,
             },],
-          checkedItemsId: [1, 2, 6, 8, 9],
+          checkedItemsIdList: [1, 2, 6, 8, 9],
         },
         {
           id: 3,
@@ -156,7 +186,7 @@ export default {
               color: '#0000CD',
               checked: false,
             },],
-          checkedItemsId: [2, 3, 4],
+          checkedItemsIdList: [2, 3, 4],
         },
         {
           id: 4,
@@ -189,7 +219,7 @@ export default {
               color: '#4169E1',
               checked: true,
             },],
-          checkedItemsId: [1, 2, 3, 4],
+          checkedItemsIdList: [1, 2, 3, 4],
         },
         {
           id: 5,
@@ -243,7 +273,7 @@ export default {
               color: '#00FA9A',
               checked: false,
             },],
-          checkedItemsId: [],
+          checkedItemsIdList: [],
         },];
 
       commit({

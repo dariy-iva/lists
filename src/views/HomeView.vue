@@ -1,12 +1,11 @@
 <template>
   <div class="home">
     <ul>
-      <li v-for="list in lists" :key="`list-${list.id}`">
-        <label><input type="checkbox" :name="`list-${list.id}`">{{list.name}}</label>
+      <List v-for="list in lists" :key="`list-${list.id}`" :list="list">
         <ul>
           <Item v-for="item in list.items" :key="`list-${list.id}-item-${item.id}`" :item="item" :listId="list.id"/>
         </ul>
-      </li>
+      </List>
     </ul>
 
 
@@ -14,11 +13,13 @@
 </template>
 
 <script>
+import List from "@/components/List";
 import Item from "@/components/Item";
 
 export default {
   name: 'HomeView',
   components: {
+    List,
     Item,
   },
   data() {
