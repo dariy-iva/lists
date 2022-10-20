@@ -90,6 +90,10 @@ export default {
 }
 
 .items-box {
-  padding: 10px 75px 0;
+  padding: 0 75px;
+}
+
+.items-box[status='open'] {
+  padding-top: 10px;
 }
 </style>
