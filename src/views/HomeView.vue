@@ -1,26 +1,28 @@
 <template>
-  <div class="home">
-    <ul>
-      <List v-for="list in lists" :key="`list-${list.id}`" :list="list">
-        <ul>
-          <Item v-for="item in list.items" :key="`list-${list.id}-item-${item.id}`" :item="item" :listId="list.id"/>
-        </ul>
-      </List>
-    </ul>
+  <main class="main">
+    <section class="section">
+      <ul class="section__list">
+        <ListCheckbox v-for="list in lists" :key="`list-checkbox-${list.id}`" :list="list"/>
+      </ul>
+    </section>
 
-
-  </div>
+    <section class="section">
+      <ul class="section__list">
+        <ListBlock v-for="list in lists" :key="`list-block-${list.id}`" :list="list"/>
+      </ul>
+    </section>
+  </main>
 </template>
 
 <script>
-import List from "@/components/List";
-import Item from "@/components/Item";
+import ListCheckbox from "@/components/ListCheckbox";
+import ListBlock from "@/components/ListBlock";
 
 export default {
   name: 'HomeView',
   components: {
-    List,
-    Item,
+    ListCheckbox,
+    ListBlock,
   },
   data() {
     return {}
@@ -35,3 +37,33 @@ export default {
   }
 }
 </script>
+
+<style >
+ul {
+  list-style-type: none;
+}
+
+.main {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
+}
+
+.section {
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-black);
+  border-radius: 10px;
+}
+
+.section__list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+</style>

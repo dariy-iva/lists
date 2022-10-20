@@ -227,7 +227,7 @@ export default {
           items: [{
             id: 1,
             name: 'Item 1',
-            count: '',
+            count: 9,
             color: '#ADFF2F',
             checked: false,
           },
