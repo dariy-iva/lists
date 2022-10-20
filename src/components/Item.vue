@@ -5,7 +5,8 @@
              @change="handleCheckedItem" class="input-checkbox">{{ item.name }}</label>
     <input type="number" min="0" :name="`list-${listId}-count-${item.id}`" :value="item.count"
            @change="handleCountChange" class="item-inputs__number">
-    <input type="color" :name="`list-${listId}-color-${item.id}`" :value="item.color" @change="handleColorChange">
+    <input type="color" :name="`list-${listId}-color-${item.id}`" :value="item.color" @change="handleColorChange"
+           class="item-inputs__color">
   </li>
 </template>
 
@@ -65,4 +66,20 @@ export default {
   text-align: end;
   border: none;
 }
+
+.item-inputs__color {
+  padding: 0;
+  border: none;
+  background: none;
+  width: 27px;
+}
+
+.item-inputs__color::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.item-inputs__color::-webkit-color-swatch {
+  border: none;
+}
+
 </style>
