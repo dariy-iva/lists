@@ -11,7 +11,7 @@ export default {
       const {listId, itemId, isChecked} = payload;
       state.lists.find(list => list.id === listId).items.find(item => item.id === itemId).checked = isChecked;
     },
-    setCountItem(state, actions, payload) {
+    setCountItem(state, payload) {
       const {listId, itemId, count} = payload;
       state.lists.find(list => list.id === listId).items.find(item => item.id === itemId).count = count;
     },
