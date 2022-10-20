@@ -1,5 +1,6 @@
 <template>
   <main class="main">
+
     <section class="section">
       <ul class="section__list">
         <ListCheckbox v-for="list in lists" :key="`list-checkbox-${list.id}`" :list="list"/>
@@ -11,6 +12,7 @@
         <ListBlock v-for="list in lists" :key="`list-block-${list.id}`" :list="list"/>
       </ul>
     </section>
+
   </main>
 </template>
 
@@ -27,27 +29,26 @@ export default {
   data() {
     return {}
   },
+
   computed: {
     lists() {
       return this.$store.state.lists.lists;
     },
   },
+
   beforeMount() {
     this.$store.dispatch('getLists');
   }
 }
 </script>
 
-<style >
-ul {
-  list-style-type: none;
-}
-
+<style>
 .main {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 30px;
+  flex-grow: 1;
 }
 
 .section {
@@ -56,6 +57,7 @@ ul {
   flex-direction: column;
   border: 1px solid var(--color-black);
   border-radius: 10px;
+  transition: height .3s;
 }
 
 .section__list {
@@ -65,5 +67,4 @@ ul {
   flex-direction: column;
   gap: 15px;
 }
-
 </style>

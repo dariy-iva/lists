@@ -1,29 +1,17 @@
 export default {
   state: () => ({
     lists: [],
-    currentList: {},
+    openedListsId: [],
   }),
-  getters: {
-    // listIndex(state, payload) {
-    //
-    // }
-  },
-
   mutations: {
     setLists(state, payload) {
       state.lists = payload.lists;
     },
-    // addList(state, payload) {
-    //   state.lists = [...state.lists, payload.list];
-    // },
-    // deleteList(state, payload) {
-    //   state.lists = state.lists.filter(list => list.id !== payload.list.id);
-    // },
     setCheckedItem(state, payload) {
       const {listId, itemId, isChecked} = payload;
       state.lists.find(list => list.id === listId).items.find(item => item.id === itemId).checked = isChecked;
     },
-    setCountItem(state, payload) {
+    setCountItem(state, actions, payload) {
       const {listId, itemId, count} = payload;
       state.lists.find(list => list.id === listId).items.find(item => item.id === itemId).count = count;
     },
@@ -31,19 +19,22 @@ export default {
       const {listId, itemId, color} = payload;
       state.lists.find(list => list.id === listId).items.find(item => item.id === itemId).color = color;
     },
-    updateCheckedItemsList(state, payload) {
+    updateCheckedItemsIdList(state, payload) {
       const {listId, itemId, isChecked} = payload;
       isChecked
         ? state.lists.find(list => list.id === listId).checkedItemsIdList.push(itemId)
         : state.lists.find(list => list.id === listId).checkedItemsIdList = state.lists.find(list => list.id === listId)
           .checkedItemsIdList.filter(id => id !== itemId)
     },
-    clearCheckedItemsList(state, payload) {
+    clearCheckedItemsIdList(state, payload) {
       state.lists.find(list => list.id === payload.listId).checkedItemsIdList = [];
     },
-    // clearCurrentList(state) {
-    //   state.currentList = {};
-    // },
+    updateOpenedListId(state, payload) {
+      const {listId, isOpen} = payload;
+      isOpen
+        ? state.openedListsId.push(listId)
+        : state.openedListsId = state.openedListsId.filter(id => id !== listId)
+    },
   },
 
   actions: {

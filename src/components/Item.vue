@@ -1,10 +1,13 @@
 <template>
   <li class="item-inputs">
+
     <label :class="`label-checkbox item-inputs__checkbox ${item.checked? 'label-checkbox_status_checked' : ''}`">
       <input type="checkbox" :name="`list-${listId}-checkbox-${item.id}`" :checked="item.checked"
              @change="handleCheckedItem" class="input-checkbox">{{ item.name }}</label>
+
     <input type="number" min="0" :name="`list-${listId}-count-${item.id}`" :value="item.count"
            @change="handleCountChange" class="item-inputs__number">
+
     <input type="color" :name="`list-${listId}-color-${item.id}`" :value="item.color" @change="handleColorChange"
            class="item-inputs__color">
   </li>
@@ -17,13 +20,14 @@ export default {
     item: Object,
     listId: Number,
   },
-  computed: {},
+
   methods: {
     handleCheckedItem(e) {
       this.$store.commit('setCheckedItem', {
         listId: this.listId, itemId: this.item.id, isChecked: e.target.checked
       });
-      this.$store.commit('updateCheckedItemsList', {
+
+      this.$store.commit('updateCheckedItemsIdList', {
         listId: this.listId, itemId: this.item.id, isChecked: e.target.checked
       });
     },
@@ -31,6 +35,7 @@ export default {
     handleCountChange(e) {
       const count = e.target.value % 1 === 0 ? e.target.value : Math.round(e.target.value);
       e.target.value = count;
+
       this.$store.commit('setCountItem', {
         listId: this.listId, itemId: this.item.id, count: +count || 0
       });

@@ -1,0 +1,38 @@
+/*custom styles for checkbox labels and inputs*/
+
+.label-checkbox {
+  position: relative;
+}
+
+.label-checkbox::before {
+  content: '';
+  position: absolute;
+  top: auto;
+  left: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--color-black);
+  box-sizing: border-box;
+}
+
+.label-checkbox_status_checked::before {
+  background: url("../images/check_icon.svg") center / contain no-repeat;
+}
+
+.label-checkbox_status_select::after {
+  content: '';
+  position: absolute;
+  top: calc(10px - 7px / 2);
+  left: calc(10px - 7px / 2);
+  display: block;
+  width: 7px;
+  height: 7px;
+  background-color: var(--color-black);
+  border-radius: 50%;
+}
+
+.input-checkbox {
+  margin-right: 15px;
+  visibility: hidden;
+}

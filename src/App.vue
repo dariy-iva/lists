@@ -1,10 +1,13 @@
 <template>
   <body id="app">
-    <router-view/>
+  <router-view/>
   </body>
 </template>
 
 <style>
+@import "assets/styles/collapse.css";
+@import "assets/styles/checkboxInput.css";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -20,5 +23,4 @@
   --color-white: #fff;
   --blue-color: #6eb4f5;
 }
-
 </style>

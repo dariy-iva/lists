@@ -1,0 +1,66 @@
+/*custom styles for collapsed blocks*/
+
+.collapse {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.collapse__title {
+  width: 100%;
+  font-weight: 700;
+  z-index: 11;
+  background-color: var(--color-white);
+}
+
+.collapse__content {
+  max-height: 0;
+  overflow: hidden;
+  position: relative;
+  top: -100%;
+  opacity: .5;
+  transition: all .3s ease;
+}
+
+.collapse__content[status="open"] {
+  max-height: max-content;
+  top: 0;
+  opacity: 1;
+}
+
+.collapse__button {
+  margin-right: 20px;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: transform .3s;
+}
+
+.collapse__button::before, .collapse__button::after {
+  content: "";
+  position: absolute;
+  top: auto;
+  right: 0;
+  left: 0;
+  display: block;
+  width: 13px;
+  height: 2px;
+  transition: all .3s ease-out;
+  background-color: var(--color-black);
+}
+
+.collapse__button::before {
+  transform: translate(-1px, -50%) rotate(45deg);
+}
+
+.collapse__button::after {
+  transform: translate(7px, -50%) rotate(-45deg);
+}
+
+.collapse__button_closed {
+  transform: rotate(-90deg);
+}

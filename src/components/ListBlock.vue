@@ -1,7 +1,8 @@
 <template>
-  <li class="block">
-    <p class="block__name">{{ list.name }}</p>
-    <div v-show="checkedItems.length" class="colors">
+  <li class="block collapse">
+    <p class="block__name collapse__title">{{ list.name }}</p>
+
+    <div :status="isOpenedList && checkedItems.length ? 'open' : 'close'" class="colors collapse__content">
       <ul v-if="isSortedCell" class="colors__rows">
         <li v-for="item in checkedItems" :key="`list-${list.id}-row-${item.id}`" class="colors__row">
           <div v-for="color in item.count" :key="`item-${item.id}-cell-${color}`" :id="item.id"
@@ -14,11 +15,12 @@
         </li>
       </ul>
     </div>
-    <button v-show="checkedItems.length" type="button" @click="handleSortButtonClick" class="block__button">
+
+    <button type="button" @click="handleSortButtonClick"
+            :class="`block__button ${checkedItems.length && isOpenedList ? 'block__button_visible' : ''}`">
       {{ isSortedCell ? 'Перемешать' : 'Сортировать' }}
     </button>
   </li>
-
 </template>
 
 <script>
@@ -32,6 +34,7 @@ export default {
       isSortedCell: true,
     }
   },
+
   computed: {
     checkedItems() {
       return this.list.items.filter(item => item.checked && item.count);
@@ -39,32 +42,25 @@ export default {
 
     mixedItems() {
       const sortedColors = [];
+
       this.checkedItems.forEach(item => {
         for (let i = 0; i < item.count; i++)
           sortedColors.push({itemId: item.id, color: item.color});
       });
+
       return this.isSortedCell ? sortedColors : this.shuffle(sortedColors);
     },
 
+    isOpenedList() {
+      return this.$store.state.lists.openedListsId.includes(this.list.id);
+    },
   },
+
   methods: {
-    handleCellClick(e) {
-      const itemId = +e.target.id;
-      const newCount = this.list.items.find(item => item.id === itemId).count - 1;
-      this.$store.commit('setCountItem', {
-        listId: this.list.id, itemId: itemId, count: newCount
-      });
-    },
-
-    handleSortButtonClick() {
-      this.isSortedCell = !this.isSortedCell;
-    },
-
     shuffle(array) {
       let currentIndex = array.length, temporaryValue, randomIndex;
 
       while (0 !== currentIndex) {
-
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
 
@@ -74,29 +70,40 @@ export default {
       }
 
       return array;
-    }
+    },
+
+    handleCellClick(e) {
+      const itemId = +e.target.id;
+      const newCount = this.list.items.find(item => item.id === itemId).count - 1;
+
+      this.$store.commit('setCountItem', {
+        listId: this.list.id, itemId: itemId, count: newCount
+      });
+    },
+
+    handleSortButtonClick() {
+      this.isSortedCell = !this.isSortedCell;
+    },
   }
 }
 </script>
 
-<style scoped>
-
+<style>
 .block {
   position: relative;
-  padding: 15px 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  padding: 0 10px 15px;
   border: 1px solid var(--color-black);
   border-radius: 15px;
 }
 
 .block__name {
   margin: 0;
-  font-weight: 700;
+  padding-top: 15px;
 }
 
 .block__button {
+  visibility: hidden;
+  opacity: 0;
   position: absolute;
   top: 10px;
   right: 10px;
@@ -107,14 +114,21 @@ export default {
   background-color: var(--blue-color);
   color: var(--color-white);
   cursor: pointer;
-  transition: opacity .3s;
+  z-index: 20;
+  transition: all .3s;
 }
 
 .block__button:hover {
   opacity: .8;
 }
 
-.colors {
+.block__button_visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.colors[status="open"] {
+  margin-top: 15px;
   min-height: 100px;
   display: flex;
   flex-direction: column;
@@ -146,6 +160,4 @@ export default {
 .colors__cell:hover {
   transform: scale(1.2);
 }
-
-
 </style>
