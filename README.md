@@ -1,6 +1,6 @@
 # Проект Lists (тестовое задание)
 
-[Ссылка на проект на Vercel](https://lists-nqgzhcg48-dariy-iva.vercel.app/#/)  
+[Ссылка на проект на Vercel](https://lists-plum.vercel.app/#/)  
 
 <img src="./public/promo.webp" alt="promo_img" />
 
