@@ -19,16 +19,6 @@ export default {
       const {listId, itemId, color} = payload;
       state.lists.find(list => list.id === listId).items.find(item => item.id === itemId).color = color;
     },
-    updateCheckedItemsIdList(state, payload) {
-      const {listId, itemId, isChecked} = payload;
-      isChecked
-        ? state.lists.find(list => list.id === listId).checkedItemsIdList.push(itemId)
-        : state.lists.find(list => list.id === listId).checkedItemsIdList = state.lists.find(list => list.id === listId)
-          .checkedItemsIdList.filter(id => id !== itemId)
-    },
-    clearCheckedItemsIdList(state, payload) {
-      state.lists.find(list => list.id === payload.listId).checkedItemsIdList = [];
-    },
     updateOpenedListId(state, payload) {
       const {listId, isOpen} = payload;
       isOpen
@@ -70,7 +60,6 @@ export default {
             color: '#0000FF',
             checked: false,
           },],
-        checkedItemsIdList: [1, 2, 3],
       },
         {
           id: 2,
@@ -137,7 +126,6 @@ export default {
               color: '#FFE4E1',
               checked: true,
             },],
-          checkedItemsIdList: [1, 2, 6, 8, 9],
         },
         {
           id: 3,
@@ -177,7 +165,6 @@ export default {
               color: '#0000CD',
               checked: false,
             },],
-          checkedItemsIdList: [2, 3, 4],
         },
         {
           id: 4,
@@ -210,7 +197,6 @@ export default {
               color: '#4169E1',
               checked: true,
             },],
-          checkedItemsIdList: [1, 2, 3, 4],
         },
         {
           id: 5,
@@ -264,7 +250,6 @@ export default {
               color: '#00FA9A',
               checked: false,
             },],
-          checkedItemsIdList: [],
         },];
 
       commit({

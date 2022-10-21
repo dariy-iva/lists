@@ -49,6 +49,7 @@ export default {
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 30px;
   flex-grow: 1;
+  box-sizing: border-box;
 }
 
 .section {
@@ -66,5 +67,18 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+@media (max-width: 1500px) {
+  .main {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 850px) {
+  .main {
+    padding: 0 15px;
+    grid-gap: 15px;
+  }
 }
 </style>

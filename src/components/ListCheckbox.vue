@@ -7,7 +7,7 @@
       <label
         :class="`label-checkbox collapse__label ${isCheckedList
         ? 'label-checkbox_status_checked'
-        : list.checkedItemsIdList.length
+        : checkedItemsIdList.length
           ? 'label-checkbox_status_select'
           : ''}`">
         <input type="checkbox" :name="`list-${list.id}`" :checked="isCheckedList" @change="handleCheckedList"
@@ -35,8 +35,16 @@ export default {
   },
 
   computed: {
+    checkedItemsIdList() {
+      const checkedItemsIdList = [];
+      this.list.items.forEach(item => {
+        item.checked && checkedItemsIdList.push(item.id);
+      })
+      return checkedItemsIdList;
+    },
+
     isCheckedList() {
-      return this.list.checkedItemsIdList.length === this.list.items.length;
+      return this.checkedItemsIdList.length === this.list.items.length;
     },
 
     isOpenedList() {
@@ -54,31 +62,11 @@ export default {
     handleCheckedList(e) {
       const checked = e.target.checked;
 
-      if (checked) {
-        this.list.items.filter(item => !this.list.checkedItemsIdList.includes(item.id))
-          .forEach(item => {
-
-            this.$store.commit('setCheckedItem', {
-              listId: this.list.id, itemId: item.id, isChecked: true
-            });
-
-            this.$store.commit('updateCheckedItemsIdList', {
-              listId: this.list.id, itemId: item.id, isChecked: true
-            });
-          })
-      } else {
-        this.list.items.filter(item => this.list.checkedItemsIdList.includes(item.id))
-          .forEach(item => {
-
-            this.$store.commit('setCheckedItem', {
-              listId: this.list.id, itemId: item.id, isChecked: false
-            });
-          })
-
-        this.$store.commit('clearCheckedItemsIdList', {
-          listId: this.list.id
+      this.list.items.forEach(item => {
+        this.$store.commit('setCheckedItem', {
+          listId: this.list.id, itemId: item.id, isChecked: checked
         });
-      }
+      })
     },
   }
 }
@@ -95,5 +83,12 @@ export default {
 
 .items-box[status='open'] {
   padding-top: 10px;
+}
+
+@media (max-width: 850px) {
+  .items-box {
+    padding-left: 50px;
+    padding-right: 15px;
+  }
 }
 </style>

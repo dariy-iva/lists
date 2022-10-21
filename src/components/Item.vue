@@ -26,10 +26,6 @@ export default {
       this.$store.commit('setCheckedItem', {
         listId: this.listId, itemId: this.item.id, isChecked: e.target.checked
       });
-
-      this.$store.commit('updateCheckedItemsIdList', {
-        listId: this.listId, itemId: this.item.id, isChecked: e.target.checked
-      });
     },
 
     handleCountChange(e) {
