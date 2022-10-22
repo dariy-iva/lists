@@ -5,21 +5,21 @@
       <input type="checkbox"
              :name="`list-${listId}-checkbox-${item.id}`"
              :checked="item.checked"
-             @change="handleCheckedItem"
-             class="input-checkbox">{{ item.name }}</label>
+             class="input-checkbox"
+             @change="handleCheckedItem">{{ item.name }}</label>
 
     <input type="number"
            min="0"
            :name="`list-${listId}-count-${item.id}`"
            :value="item.count"
-           @change="handleCountChange"
-           class="item-inputs__number">
+           class="item-inputs__number"
+           @change="handleCountChange">
 
     <input type="color"
            :name="`list-${listId}-color-${item.id}`"
            :value="item.color"
-           @change="handleColorChange"
-           class="item-inputs__color">
+           class="item-inputs__color"
+           @change="handleColorChange">
   </li>
 </template>
 

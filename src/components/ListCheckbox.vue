@@ -3,8 +3,8 @@
 
     <div class="collapse__title list-name">
       <button type="button"
-              @click="handleCollapseButtonClick"
-              :class="`collapse__button ${!isOpenedList ? 'collapse__button_closed' : ''}`"></button>
+              :class="`collapse__button ${!isOpenedList ? 'collapse__button_closed' : ''}`"
+              @click="handleCollapseButtonClick"></button>
       <label
         :class="`label-checkbox collapse__label ${isCheckedList
         ? 'label-checkbox_status_checked'
@@ -14,8 +14,8 @@
         <input type="checkbox"
                :name="`list-${list.id}`"
                :checked="isCheckedList"
-               @change="handleCheckedList"
-               class="input-checkbox">
+               class="input-checkbox"
+               @change="handleCheckedList">
         {{ list.name }}
       </label>
     </div>

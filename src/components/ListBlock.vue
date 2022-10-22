@@ -10,8 +10,8 @@
             :key="`list-${list.id}-row-${item.id}`"
             class="colors__row">
           <div v-for="color in item.count"
-               :key="`item-${item.id}-cell-${color}`"
                :id="item.id"
+               :key="`item-${item.id}-cell-${color}`"
                :style="`background-color: ${item.color}`"
                class="colors__cell"
                @click="handleCellClick"></div>
@@ -20,8 +20,8 @@
       <ul v-else
           class="colors__row">
         <li v-for="(item,index) in mixedItems"
-            :key="`list-${list.id}-cell-${index}`"
             :id="item.itemId"
+            :key="`list-${list.id}-cell-${index}`"
             :style="`background-color: ${item.color}`"
             class="colors__cell"
             @click="handleCellClick">
@@ -30,8 +30,8 @@
     </div>
 
     <button type="button"
-            @click="handleSortButtonClick"
-            :class="`block__button ${checkedItems.length && isOpenedList ? 'block__button_visible' : ''}`">
+            :class="`block__button ${checkedItems.length && isOpenedList ? 'block__button_visible' : ''}`"
+            @click="handleSortButtonClick">
       {{ isSortedCell ? 'Перемешать' : 'Сортировать' }}
     </button>
   </li>
