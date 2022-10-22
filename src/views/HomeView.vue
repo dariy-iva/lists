@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import ListCheckbox from "@/components/ListCheckbox";
 import ListBlock from "@/components/ListBlock";
 
@@ -35,9 +36,7 @@ export default {
   },
 
   computed: {
-    lists() {
-      return this.$store.state.lists.lists;
-    },
+    ...mapGetters(['lists']),
   },
 
   beforeMount() {

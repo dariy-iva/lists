@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import Item from "@/components/Item";
 
 export default {
@@ -43,6 +44,8 @@ export default {
   },
 
   computed: {
+    ...mapGetters(['openedListsId']),
+
     checkedItemsIdList() {
       const checkedItemsIdList = [];
       this.list.items.forEach(item => {
@@ -56,7 +59,7 @@ export default {
     },
 
     isOpenedList() {
-      return this.$store.state.lists.openedListsId.includes(this.list.id);
+      return this.openedListsId.includes(this.list.id);
     },
   },
 

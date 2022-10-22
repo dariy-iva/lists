@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+
 export default {
   name: "ListBlock",
   props: {
@@ -50,6 +52,8 @@ export default {
   },
 
   computed: {
+    ...mapGetters(['openedListsId']),
+
     checkedItems() {
       return this.list.items.filter(item => item.checked && item.count);
     },
@@ -66,7 +70,7 @@ export default {
     },
 
     isOpenedList() {
-      return this.$store.state.lists.openedListsId.includes(this.list.id);
+      return this.openedListsId.includes(this.list.id);
     },
   },
 

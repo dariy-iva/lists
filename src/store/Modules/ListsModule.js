@@ -3,6 +3,15 @@ export default {
     lists: [],
     openedListsId: [],
   }),
+  getters: {
+    lists(state) {
+      return state.lists;
+    },
+    openedListsId(state) {
+      return state.openedListsId;
+    },
+  },
+
   mutations: {
     setLists(state, payload) {
       state.lists = payload.lists;
