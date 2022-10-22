@@ -3,13 +3,17 @@
 
     <section class="section">
       <ul class="section__list">
-        <ListCheckbox v-for="list in lists" :key="`list-checkbox-${list.id}`" :list="list"/>
+        <ListCheckbox v-for="list in lists"
+                      :key="`list-checkbox-${list.id}`"
+                      :list="list"/>
       </ul>
     </section>
 
     <section class="section">
       <ul class="section__list">
-        <ListBlock v-for="list in lists" :key="`list-block-${list.id}`" :list="list"/>
+        <ListBlock v-for="list in lists"
+                   :key="`list-block-${list.id}`"
+                   :list="list"/>
       </ul>
     </section>
 

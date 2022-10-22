@@ -2,7 +2,8 @@
   <li class="collapse">
 
     <div class="collapse__title list-name">
-      <button type="button" @click="handleCollapseButtonClick"
+      <button type="button"
+              @click="handleCollapseButtonClick"
               :class="`collapse__button ${!isOpenedList ? 'collapse__button_closed' : ''}`"></button>
       <label
         :class="`label-checkbox collapse__label ${isCheckedList
@@ -10,14 +11,21 @@
         : checkedItemsIdList.length
           ? 'label-checkbox_status_select'
           : ''}`">
-        <input type="checkbox" :name="`list-${list.id}`" :checked="isCheckedList" @change="handleCheckedList"
+        <input type="checkbox"
+               :name="`list-${list.id}`"
+               :checked="isCheckedList"
+               @change="handleCheckedList"
                class="input-checkbox">
         {{ list.name }}
       </label>
     </div>
 
-    <ul :status="isOpenedList ? 'open' : 'close'" class="collapse__content items-box">
-      <Item v-for="item in list.items" :key="`list-${list.id}-item-${item.id}`" :item="item" :listId="list.id"/>
+    <ul :status="isOpenedList ? 'open' : 'close'"
+        class="collapse__content items-box">
+      <Item v-for="item in list.items"
+            :key="`list-${list.id}-item-${item.id}`"
+            :item="item"
+            :listId="list.id"/>
     </ul>
   </li>
 </template>

@@ -2,21 +2,35 @@
   <li class="block collapse">
     <p class="block__name collapse__title">{{ list.name }}</p>
 
-    <div :status="isOpenedList && checkedItems.length ? 'open' : 'close'" class="colors collapse__content">
-      <ul v-if="isSortedCell" class="colors__rows">
-        <li v-for="item in checkedItems" :key="`list-${list.id}-row-${item.id}`" class="colors__row">
-          <div v-for="color in item.count" :key="`item-${item.id}-cell-${color}`" :id="item.id"
-               :style="`background-color: ${item.color}`" class="colors__cell" @click="handleCellClick"></div>
+    <div :status="isOpenedList && checkedItems.length ? 'open' : 'close'"
+         class="colors collapse__content">
+      <ul v-if="isSortedCell"
+          class="colors__rows">
+        <li v-for="item in checkedItems"
+            :key="`list-${list.id}-row-${item.id}`"
+            class="colors__row">
+          <div v-for="color in item.count"
+               :key="`item-${item.id}-cell-${color}`"
+               :id="item.id"
+               :style="`background-color: ${item.color}`"
+               class="colors__cell"
+               @click="handleCellClick"></div>
         </li>
       </ul>
-      <ul v-else class="colors__row">
-        <li v-for="(item,index) in mixedItems" :key="`list-${list.id}-cell-${index}`" :id="item.itemId"
-            :style="`background-color: ${item.color}`" class="colors__cell" @click="handleCellClick">
+      <ul v-else
+          class="colors__row">
+        <li v-for="(item,index) in mixedItems"
+            :key="`list-${list.id}-cell-${index}`"
+            :id="item.itemId"
+            :style="`background-color: ${item.color}`"
+            class="colors__cell"
+            @click="handleCellClick">
         </li>
       </ul>
     </div>
 
-    <button type="button" @click="handleSortButtonClick"
+    <button type="button"
+            @click="handleSortButtonClick"
             :class="`block__button ${checkedItems.length && isOpenedList ? 'block__button_visible' : ''}`">
       {{ isSortedCell ? 'Перемешать' : 'Сортировать' }}
     </button>
